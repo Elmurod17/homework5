@@ -91,7 +91,7 @@ typeSelect.addEventListener("change", () => {
   let data = [];
   if (selectedType === "country") {
     data = [
-      "USA",
+      "AQSH",
       "Yaponiya",
       "Germany",
       "Koreya",
