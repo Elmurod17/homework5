@@ -52,17 +52,44 @@ function loader(bool) {
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("js-delete")) {
     if (checkAuth()) {
-      //
+      fetch(`https://json-api.uz/api/project/fn43/cars/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          init();
+        })
+        .then((res) => {})
+        .finally(() => {});
     } else {
       elInfoModal.showModal();
     }
   }
   if (e.target.classList.contains("js-edit")) {
     if (checkAuth()) {
-      //
+      
     } else {
       elInfoModal.showModal();
     }
+  }
+});
+
+function getById(id) {
+  fetch(`https://json-api.uz/api/project/fn43/cars/${id}`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      fill(res);
+    })
+    .finally(() => {});
+}
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    deleteEl(e.target.id);
+  }
+  if (e.target.classList.contains("edit-btn")) {
+    getById(e.target.id);
   }
 });
 
