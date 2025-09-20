@@ -137,6 +137,8 @@ typeSelect.addEventListener("change", () => {
     ];
   }
 
+  data = [...new Set(data)];
+
   valueSelect.innerHTML = "<option disabled selected>Select</option>";
   data.forEach((item) => {
     const option = document.createElement("option");
