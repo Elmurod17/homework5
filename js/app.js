@@ -9,6 +9,8 @@ import {
 } from "./html-selection.js";
 import { ui } from "./ui.js";
 
+let allCars = [];
+
 if (checkAuth()) {
   elLoginLogoutButton.innerText = "Log out";
 } else {
@@ -18,11 +20,10 @@ if (checkAuth()) {
 function init() {
   loader(true);
   fetch(BASE_URL + "/cars")
+    .then((res) => res.json())
     .then((res) => {
-      return res.json();
-    })
-    .then((res) => {
-      ui(res.data);
+      allCars = res.data; // kelgan mashinalarni saqlash
+      ui(allCars);
     })
     .catch(() => {})
     .finally(() => {
@@ -47,9 +48,7 @@ function loader(bool) {
 }
 
 // crud
-
 document.addEventListener("click", (e) => {
-  // delete
   if (e.target.classList.contains("js-delete")) {
     if (checkAuth()) {
       //
@@ -57,7 +56,6 @@ document.addEventListener("click", (e) => {
       elInfoModal.showModal();
     }
   }
-  // edit
   if (e.target.classList.contains("js-edit")) {
     if (checkAuth()) {
       //
@@ -68,6 +66,7 @@ document.addEventListener("click", (e) => {
 });
 
 init();
+
 // events
 elLoginLogoutButton.addEventListener("click", () => {
   if (checkAuth()) {
@@ -75,11 +74,91 @@ elLoginLogoutButton.addEventListener("click", () => {
   } else {
     elLoginLogoutButton.innerText = "Log in";
     location.href = "./pages/register.html";
-
-    location.reload();
   }
 });
 
 elModalLoginButton.addEventListener("click", () => {
   location.href = "./pages/register.html";
+});
+
+// select
+const typeSelect = document.getElementById("typeSelect");
+const valueSelect = document.getElementById("valueSelect");
+
+typeSelect.addEventListener("change", () => {
+  const selectedType = typeSelect.value;
+
+  let data = [];
+  if (selectedType === "country") {
+    data = [
+      "USA",
+      "Yaponiya",
+      "Germany",
+      "Koreya",
+      "Shvetsiya",
+      "UK",
+      "Fransiya",
+      "Chexiya",
+    ];
+  } else if (selectedType === "category") {
+    data = [
+      "SUV",
+      "Sedan",
+      "Kupe",
+      "Crossover",
+      "Off-road",
+      "Universal",
+      "Pikap",
+    ];
+  } else if (selectedType === "color") {
+    data = [
+      "Po'lat ko'k",
+      "Qora",
+      "Kumush",
+      "Oltin",
+      "Baliq qizil",
+      "Dengiz ko'k",
+      "Kulrang",
+      "Oq",
+      "Qizil",
+      "Jigarrang",
+      "To'q kulrang",
+      "Binafsha",
+      "Yashil",
+      "To'q sariq",
+      "Lavanta",
+      "Bej",
+      "Pushti",
+      "Zaytun",
+      "Sariq",
+      "Dark slate",
+      "Orange",
+      "To'q qizil",
+    ];
+  }
+
+  valueSelect.innerHTML = "<option disabled selected>Select</option>";
+  data.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    valueSelect.appendChild(option);
+  });
+});
+
+valueSelect.addEventListener("change", () => {
+  const selectedType = typeSelect.value;
+  const selectedValue = valueSelect.value;
+
+  let filtered = [];
+
+  if (selectedType === "country") {
+    filtered = allCars.filter((car) => car.country === selectedValue);
+  } else if (selectedType === "category") {
+    filtered = allCars.filter((car) => car.category === selectedValue);
+  } else if (selectedType === "color") {
+    filtered = allCars.filter((car) => car.colorName === selectedValue);
+  }
+
+  ui(filtered);
 });

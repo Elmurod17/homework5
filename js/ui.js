@@ -2,6 +2,12 @@ import { elCardContainer, elCardTemplate } from "./html-selection.js";
 
 export function ui(cars) {
   elCardContainer.innerHTML = "";
+  if (!cars.length) {
+    elCardContainer.innerHTML =
+      "<p class='text-center text-gray-500'>Hech narsa topilmadi</p>";
+    return;
+  }
+
   cars.forEach((car) => {
     const clone = elCardTemplate.cloneNode(true).content;
     const elName = clone.getElementById("name");
@@ -14,8 +20,8 @@ export function ui(cars) {
     const elDelete = clone.querySelector(".js-delete");
     const elEdit = clone.querySelector(".js-edit");
 
-    // id
-    elInfo.id = car.id;
+    // id va ma’lumotlarni qo‘yish
+    elInfo.href = `./pages/details.html?id=${car.id}`;
     elDelete.id = car.id;
     elEdit.id = car.id;
 
