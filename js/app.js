@@ -1,6 +1,7 @@
 import { checkAuth } from "./check-auth.js";
 import { BASE_URL, LOADER_COUNT } from "./constants.js";
 import {
+  elBtnAllCars,
   elCardLoader,
   elCardSkletonTemplate,
   elInfoModal,
@@ -93,10 +94,10 @@ typeSelect.addEventListener("change", () => {
     data = [
       "AQSH",
       "Yaponiya",
-      "Germany",
+      "Germaniya",
       "Koreya",
       "Shvetsiya",
-      "UK",
+      "Buyuk Britaniya",
       "Fransiya",
       "Chexiya",
     ];
@@ -163,4 +164,8 @@ valueSelect.addEventListener("change", () => {
   }
 
   ui(filtered);
+});
+
+elBtnAllCars.addEventListener("click", () => {
+  location.reload();
 });

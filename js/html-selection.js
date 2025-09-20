@@ -28,6 +28,7 @@ const elDetailsHighway = document.getElementById("detailsHighway");
 const elDetailsCombined = document.getElementById("detailsCombined");
 const elDetailsWrapper = document.getElementById("detailsWrapper");
 const elDetailsLoading = document.getElementById("detailsLoading");
+const elBtnAllCars = document.getElementById("btnAllCars");
 
 // loader
 const elCardLoader = document.getElementById("cardLoader");
@@ -63,4 +64,5 @@ export {
   elDetailsCombined,
   elDetailsWrapper,
   elDetailsLoading,
+  elBtnAllCars,
 };
