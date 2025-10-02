@@ -5,7 +5,7 @@ const elCardSkletonTemplate = document.getElementById("cardSkletonTemplate");
 const elCardContainer = document.getElementById("cardContainer");
 const elLoginLogoutButton = document.getElementById("loginLogoutButton");
 const elModalLoginButton = document.getElementById("modalLoginButton");
-
+const elLoginForm = document.getElementById("form");
 // elements details
 const elDetailsTitle = document.getElementById("detailsTitle");
 const elDetailsDescription = document.getElementById("detailsDescription");
@@ -37,6 +37,7 @@ const elInfoModal = document.getElementById("infoModal");
 
 export {
   elCardTemplate,
+  elLoginForm,
   elCardContainer,
   elCardLoader,
   elCardSkletonTemplate,

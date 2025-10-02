@@ -52,13 +52,21 @@ function loader(bool) {
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("js-delete")) {
     if (checkAuth()) {
-      fetch(`https://json-api.uz/api/project/fn43/cars/${id}`, {
+      const token = localStorage.getItem("token");
+      fetch(BASE_URL + `/cars/${evt.target.id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       })
         .then((res) => {
+          return res.text();
+        })
+        .then((res) => {
+          alert(res);
+          elCadrContainer.innerHTML = "";
           init();
         })
-        .then((res) => {})
         .finally(() => {});
     } else {
       elInfoModal.showModal();
@@ -66,7 +74,6 @@ document.addEventListener("click", (e) => {
   }
   if (e.target.classList.contains("js-edit")) {
     if (checkAuth()) {
-      
     } else {
       elInfoModal.showModal();
     }
